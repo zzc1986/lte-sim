@@ -1,0 +1,62 @@
+Hi there, 
+this wiki page introduce you to the use of tools provided by LTE-Sim.
+
+
+== make_plr ==
+it computes the packet loss ratio starting from the number of sent packet and the number of received packet. 
+
+Example: PLR fo the application layer
+
+./LTE-Sim SingleCellWithI 7 1 1 0 0 1 0 1 1 3 0.1 128 > trace.tr
+grep -c "^TX" trace.tr > tmp
+grep -c "^RX" trace.tr >> tmp
+./src/Simulation/TOOLS/make_plr  tmp
+
+
+
+make_cell_spectral_efficiency : it computes the total cell spectral efficiency 
+
+Example: we suppose to run a simulation with bandwidth = 10Mhz and duration = 30 seconds.
+
+./LTE-Sim SingleCellWithI 7 1 1 0 0 1 0 1 1 3 0.1 128 > trace.tr
+bandwidth=10
+time=30
+grep "^RX" trace.tr  | awk '{print $8}'  > tmp
+./src/Simulation/TOOLS/make_cell_spectral_efficiency   tmp   ${time}   ${bandwidth} 
+
+  
+
+make_goodput : it computes the  goodput of a given flow 
+
+Example: 
+
+./LTE-Sim SingleCellWithI 7 1 1 0 0 1 0 1 1 3 0.1 128 > trace.tr
+time=30
+grep "RX INF_BUF"   trace.tr  | awk '{print $8}'  > tmp
+./src/Simulation/TOOLS/make_goodput  tmp ${time} 
+
+
+
+make_fairness_index : it computes the  FI among flows
+
+Example: 
+
+./LTE-Sim SingleCellWithI 7 1 10 0 0 1 0 1 1 3 0.1 128 > trace.tr
+time=30
+users=10
+for bearer in $(seq 0 1 $(( ${users}- 1 )))
+do 
+        grep "RX INF_BUF"   trace.tr  | grep "B ${bearer} " |  awk '{print $8}'  > tmp
+        ./src/Simulation/TOOLS/make_goodput  tmp ${time}  >>tmp_2
+done 
+./src/Simulation/TOOLS/make_fairness_index  tmp_2  
+
+
+
+make_cdf : it computes the cumulative distribution function of packet delays
+
+Example: scenario with 10 video flows
+
+./LTE-Sim SingleCellWithI 7 1 10 0 10 0 0 1 1 3 0.1 128 > trace.tr
+grep "RX VIDEO"  trace.tr  |  awk '{print $14}' > tmp
+./src/Simulation/TOOLS/make_cdf     tmp     cdf_of_delays.tr  
