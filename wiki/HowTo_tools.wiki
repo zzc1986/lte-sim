@@ -15,7 +15,7 @@ grep -c "^RX" trace.tr >> tmp
 
 
 === make_cell_spectral_efficiency ===
-it computes the total cell spectral efficiency 
+it computes the total cell spectral efficiency as the sum of bits correctly received by nodes into a cell for bandwidth and simulation times. It is expressed in bits/Hz/s. 
 
 Example: we suppose to run a simulation with bandwidth = 10Mhz and duration = 30 seconds.
 {{{
@@ -28,7 +28,7 @@ grep "^RX" trace.tr  | awk '{print $8}'  > tmp
   
 
 === make_goodput ===
-it computes the  goodput of a given flow 
+it computes the  goodput of a given flow as the ratio between the sum of bits correctly received and the simulation time.
 
 Example: 
 {{{
@@ -40,7 +40,7 @@ grep "RX INF_BUF"   trace.tr  | awk '{print $8}'  > tmp
 
 
 === make_fairness_index ===
-it computes the  FI among flows
+it computes the  FI among flows by using the Jain's fairness index. 
 
 Example: 
 {{{
@@ -65,3 +65,5 @@ Example: scenario with 10 video flows
 grep "RX VIDEO"  trace.tr  |  awk '{print $14}' > tmp
 ./src/Simulation/TOOLS/make_cdf     tmp     cdf_of_delays.tr  
 }}}
+
+cdf_of_delays.tr will have two colums. The first one is the delay and the second one is the CDF value.
