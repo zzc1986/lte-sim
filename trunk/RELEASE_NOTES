@@ -9,10 +9,9 @@ Release 4.0
 
 Availability
 ------------
-This release is available from the svn repository
-        $ svn co http://telematics.poliba.it/svn/LTE-Sim/
-and from the following link:
-        http://telematics.poliba.it/images/file/piro/LTE-Sim_R3_1.tar.gz
+This release is available from these svn repositories
+        http://telematics.poliba.it/svn/LTE-Sim/
+	http://code.google.com/p/lte-sim/
 
 
 Supported platforms
