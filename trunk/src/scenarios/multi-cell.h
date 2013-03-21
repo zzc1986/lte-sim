@@ -64,7 +64,7 @@ static void MultiCell (int nbCell, double radius,
   double flow_duration = 100;
 
   int cluster = 3;
-  double bandwidth = 1.4;
+  double bandwidth = 10;
 
   // CREATE COMPONENT MANAGER
   Simulator *simulator = Simulator::Init();
