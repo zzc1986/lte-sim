@@ -350,9 +350,10 @@ static void SingleCellWithFemto ( double radius, int nbBuildings, int buildingTy
 		  // register ue to the enb
 		  eNBs->at (j)->RegisterUserEquipment (ue);
 		  // define the channel realization
-		  MacroCellUrbanAreaChannelRealization* c = new MacroCellUrbanAreaChannelRealization (eNBs->at (j), ue);
-		  c->SetChannelType (ChannelRealization::CHANNEL_TYPE_PED_A);
-		  eNBs->at (j)->GetPhy ()->GetDlChannel ()->GetPropagationLossModel ()->AddChannelRealization (c);
+		  MacroCellUrbanAreaChannelRealization* c_dl = new MacroCellUrbanAreaChannelRealization (eNBs->at (j), ue);
+		  eNBs->at (j)->GetPhy ()->GetDlChannel ()->GetPropagationLossModel ()->AddChannelRealization (c_dl);
+		  MacroCellUrbanAreaChannelRealization* c_ul = new MacroCellUrbanAreaChannelRealization (ue, eNBs->at (j));
+		  eNBs->at (j)->GetPhy ()->GetUlChannel ()->GetPropagationLossModel ()->AddChannelRealization (c_ul);
 
 		  idUE++;
         }
