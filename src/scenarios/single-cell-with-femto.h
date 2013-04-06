@@ -52,20 +52,20 @@
 #include <cstring>
 
 
-static void SingleCellWithFemto ( double radius, int nbBuildings, int buildingType, double activityRatio,
+static void SingleCellWithFemto (double radius, int nbBuildings, int buildingType, double activityRatio,
                        int nbUE, int nbFemtoUE,
                        int nbVoIP, int nbVideo, int nbBE, int nbCBR,
                        int sched_type,
                        int frame_struct,
                        int speed, int accessPolicy,
-		               double maxDelay, int videoBitRate,
+		       double maxDelay, int videoBitRate,
                        int seed)
 {
   int nbCell = 1;
 
   // define simulation times
-  double duration = 100;
-  double flow_duration = 100;
+  double duration = 30;
+  double flow_duration = 20;
 
   int cluster = 3;
   double bandwidth = 5;
@@ -327,8 +327,8 @@ static void SingleCellWithFemto ( double radius, int nbBuildings, int buildingTy
 												 posX, posY, speed, speedDirection,
 												 cells->at (j),
 												 eNBs->at (j),
-												 1, //HO activated!
-												 Mobility::RANDOM_DIRECTION);
+												 0, //HO deactivated!
+												 Mobility::CONSTANT_POSITION);
 
 		  std::cout << "Created UE - id " << idUE << " position " << posX << " " << posY
 				  << ", cell " <<  ue->GetCell ()->GetIdCell ()
@@ -380,8 +380,8 @@ static void SingleCellWithFemto ( double radius, int nbBuildings, int buildingTy
 												 posX, posY, speed, speedDirection,
 												 femtocells->at (j),
 												 HeNBs->at (j),
-												 1, //HO activated!
-												 Mobility::RANDOM_DIRECTION);
+												 0, //HO deactivated!
+												 Mobility::CONSTANT_POSITION);
 
 		  std::cout << "Created UE in femto-cell - id " << idUE << " position " << posX << " " << posY
 				  << ", cell " <<  ue->GetCell ()->GetIdCell ()
@@ -415,7 +415,7 @@ static void SingleCellWithFemto ( double radius, int nbBuildings, int buildingTy
 		  // define the channel realization
 		  FemtoCellUrbanAreaChannelRealization* c_dl = new FemtoCellUrbanAreaChannelRealization (HeNBs->at (j), ue);
 		  HeNBs->at (j)->GetPhy ()->GetDlChannel ()->GetPropagationLossModel ()->AddChannelRealization (c_dl);
-		  FemtoCellUrbanAreaChannelRealization* c_ul = new FemtoCellUrbanAreaChannelRealization (HeNBs->at (j), ue);
+		  FemtoCellUrbanAreaChannelRealization* c_ul = new FemtoCellUrbanAreaChannelRealization (ue, HeNBs->at (j));
 		  HeNBs->at (j)->GetPhy ()->GetUlChannel ()->GetPropagationLossModel ()->AddChannelRealization (c_ul);
 
 		  idUE++;
@@ -701,7 +701,6 @@ static void SingleCellWithFemto ( double radius, int nbBuildings, int buildingTy
 
 
   simulator->SetStop(duration);
-  simulator->Schedule(duration-10, &Simulator::PrintMemoryUsage, simulator);
   simulator->Run ();
 
 }
