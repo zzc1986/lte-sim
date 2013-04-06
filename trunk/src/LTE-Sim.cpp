@@ -155,26 +155,26 @@ main (int argc, char *argv[])
 
 	  if (strcmp(argv[1], "SingleCellWithFemto")==0)
 		{
-		  int nbBuilding = atoi(argv[2]);
-		  int buildingType = atoi(argv[3]);
-		  double activityRatio = atof(argv[4]);
-		  double radius = atof(argv[5]);
-		  int nbUE = atoi(argv[6]);
-		  int nbFemtoUE = atoi(argv[7]);
-		  int nbVoIP = atoi(argv[8]);
-		  int nbVideo = atoi(argv[9]);
-		  int nbBE = atoi(argv[10]);
-		  int nbCBR = atoi(argv[11]);
-		  int sched_type = atoi(argv[12]);
-		  int frame_struct = atoi(argv[13]);
-		  int speed = atoi(argv[14]);
-		  int accessPolicy = atoi(argv[15]);
-		  double maxDelay = atof(argv[16]);
-		  int video_bit_rate = atoi(argv[17]);
-		  int seed;
-		  if (argc==19) seed = atoi(argv[18]);
-		  else seed = -1;
-		  SingleCellWithFemto ( nbBuilding, buildingType, activityRatio, radius, nbUE, nbFemtoUE, nbVoIP, nbVideo, nbBE, nbCBR, sched_type, frame_struct, speed, accessPolicy, maxDelay, video_bit_rate, seed);
+		  double radius = atof(argv[2]);
+		  	          int nbBuilding = atoi(argv[3]);
+		  		  int buildingType = atoi(argv[4]);
+		  		  double activityRatio = atof(argv[5]);
+		  		  int nbUE = atoi(argv[6]);
+		  		  int nbFemtoUE = atoi(argv[7]);
+		  		  int nbVoIP = atoi(argv[8]);
+		  		  int nbVideo = atoi(argv[9]);
+		  		  int nbBE = atoi(argv[10]);
+		  		  int nbCBR = atoi(argv[11]);
+		  		  int sched_type = atoi(argv[12]);
+		  		  int frame_struct = atoi(argv[13]);
+		  		  int speed = atoi(argv[14]);
+		  		  int accessPolicy = atoi(argv[15]);
+		  		  double maxDelay = atof(argv[16]);
+		  		  int video_bit_rate = atoi(argv[17]);
+		  		  int seed;
+		  		  if (argc==19) seed = atoi(argv[18]);
+		  		  else seed = -1;
+		  SingleCellWithFemto(radius, nbBuilding, buildingType, activityRatio, nbUE, nbFemtoUE, nbVoIP, nbVideo, nbBE, nbCBR, sched_type, frame_struct, speed, accessPolicy, maxDelay, video_bit_rate, seed);
 		}
 	  if (strcmp(argv[1], "SingleCellWithStreets")==0)
 		{
